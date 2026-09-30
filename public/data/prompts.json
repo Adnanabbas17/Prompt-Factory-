@@ -1,0 +1,74 @@
+{
+  "prompts": [
+    {
+      "id": "ai-code-reviewer",
+      "title": "AI Code Reviewer",
+      "description": "Reviews code for quality, security, best practices, and performance",
+      "category": "Coding",
+      "tags": ["code-review", "quality", "security"],
+      "author": "Adnan Abbas",
+      "content": "You are an expert code reviewer. Analyze the provided code and give detailed feedback on:\n\n1. Code quality and readability\n2. Security vulnerabilities\n3. Performance optimizations\n4. Best practices\n5. Potential bugs\n\nProvide specific, actionable feedback.",
+      "useCase": "Review code before merging to production",
+      "difficulty": "Intermediate",
+      "createdAt": "2026-09-30",
+      "rating": 4.8,
+      "usageCount": 312
+    },
+    {
+      "id": "email-campaign-writer",
+      "title": "Email Campaign Writer",
+      "description": "Creates engaging email sequences for marketing campaigns",
+      "category": "Writing",
+      "tags": ["email", "marketing", "copywriting"],
+      "author": "Adnan Abbas",
+      "content": "You are a professional email copywriter. Create an engaging 5-email sequence for a marketing campaign that:\n\n1. Grabs attention in the subject line\n2. Personalizes the message\n3. Builds trust and credibility\n4. Includes a clear call-to-action\n5. Drives conversions\n\nWrite for a business/SaaS audience.",
+      "useCase": "Draft email marketing sequences",
+      "difficulty": "Beginner",
+      "createdAt": "2026-09-29",
+      "rating": 4.6,
+      "usageCount": 245
+    },
+    {
+      "id": "data-analysis-report",
+      "title": "Data Analysis Report Generator",
+      "description": "Generates insights and reports from datasets",
+      "category": "Analysis",
+      "tags": ["data", "analytics", "reporting"],
+      "author": "Adnan Abbas",
+      "content": "Analyze the provided dataset and generate a professional report including:\n\n1. Key metrics and KPIs\n2. Trends over time\n3. Anomalies and outliers\n4. Actionable insights\n5. Recommendations\n\nFormat as an executive summary with supporting details.",
+      "useCase": "Convert raw data into business insights",
+      "difficulty": "Advanced",
+      "createdAt": "2026-09-28",
+      "rating": 4.7,
+      "usageCount": 189
+    },
+    {
+      "id": "brainstorm-facilitator",
+      "title": "Brainstorm Meeting Facilitator",
+      "description": "Guides creative brainstorming sessions and ideation",
+      "category": "Brainstorm",
+      "tags": ["brainstorm", "creativity", "ideation"],
+      "author": "Adnan Abbas",
+      "content": "You are a creative brainstorming facilitator. Guide a team through an ideation session:\n\n1. Ask clarifying questions\n2. Generate 10+ creative ideas\n3. Build on ideas from the team\n4. Avoid criticism (praise all ideas)\n5. Summarize top concepts\n\nFocus on quantity and wild ideas first, quality second.",
+      "useCase": "Facilitate creative team sessions",
+      "difficulty": "Beginner",
+      "createdAt": "2026-09-27",
+      "rating": 4.5,
+      "usageCount": 156
+    },
+    {
+      "id": "course-outline",
+      "title": "Online Course Outline Builder",
+      "description": "Structures educational content into a comprehensive course",
+      "category": "Teaching",
+      "tags": ["education", "course-design", "learning"],
+      "author": "Adnan Abbas",
+      "content": "Design an online course outline for teaching [topic]:\n\n1. Define learning objectives (5-7 key goals)\n2. Structure 8-10 modules with lessons\n3. Include real-world projects/assignments\n4. Create assessment quizzes\n5. Suggest resources (articles, videos, books)\n\nMake it practical and beginner-friendly.",
+      "useCase": "Create structured online course content",
+      "difficulty": "Intermediate",
+      "createdAt": "2026-09-26",
+      "rating": 4.9,
+      "usageCount": 267
+    }
+  ]
+}

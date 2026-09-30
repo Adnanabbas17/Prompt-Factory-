@@ -1,0 +1,148 @@
+@import url('https://cdn.anthropic.com/fonts/anthropic-sans.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Anthropic Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: #ffffff;
+  color: #111827;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+}
+
+html.dark body {
+  background-color: #0f172a;
+  color: #f1f5f9;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  line-height: 1.3;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+h4 {
+  font-size: 18px;
+}
+
+p {
+  margin-bottom: 16px;
+}
+
+a {
+  color: #3b82f6;
+  text-decoration: none;
+  transition: opacity 150ms ease-in-out;
+}
+
+html.dark a {
+  color: #60a5fa;
+}
+
+a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+html.dark a:focus-visible {
+  outline-color: #60a5fa;
+}
+
+button {
+  font-family: 'Anthropic Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 150ms ease-in-out;
+}
+
+button:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+html.dark button:focus-visible {
+  outline-color: #60a5fa;
+}
+
+input, textarea, select {
+  font-family: 'Anthropic Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 15px;
+  transition: all 150ms ease-in-out;
+}
+
+input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+html.dark input:focus-visible, html.dark textarea:focus-visible, html.dark select:focus-visible {
+  outline-color: #60a5fa;
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 150ms ease-in-out;
+}
+
+/* Skeleton loading state */
+@keyframes shimmer {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.skeleton {
+  background-color: #f3f4f6;
+  animation: shimmer 2s infinite;
+}
+
+html.dark .skeleton {
+  background-color: #334155;
+}
