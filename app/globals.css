@@ -2,153 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  font-weight: 400;
-  background-color: #fffaf5;
-  color: #3d3d3d;
-  transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
-}
-
-html.dark body {
-  background-color: #1a1815;
-  color: #f5f0eb;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: Georgia, Garamond, serif;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-  line-height: 1.3;
-  color: #3d3d3d;
-}
-
-html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark h5, html.dark h6 {
-  color: #f5f0eb;
-}
-
-h1 {
-  font-size: 48px;
-  letter-spacing: 0.5px;
-}
-
-h2 {
-  font-size: 36px;
-}
-
-h3 {
-  font-size: 28px;
-  font-weight: 500;
-}
-
-h4 {
-  font-size: 24px;
-}
-
-p {
-  margin-bottom: 16px;
-}
-
-a {
-  color: #c4956f;
-  text-decoration: none;
-  transition: opacity 200ms ease-in-out;
-}
-
-html.dark a {
-  color: #d4a574;
-}
-
-a:hover {
-  opacity: 0.8;
-  text-decoration: underline;
-}
-
-a:focus-visible {
-  outline: 1px solid #c4956f;
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
-html.dark a:focus-visible {
-  outline-color: #d4a574;
-}
-
-button {
-  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 200ms ease-in-out;
-}
-
-button:focus-visible {
-  outline: 1px solid #c4956f;
-  outline-offset: 2px;
-}
-
-html.dark button:focus-visible {
-  outline-color: #d4a574;
-}
-
-input, textarea, select {
-  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-  font-size: 16px;
-  transition: all 200ms ease-in-out;
-}
-
-input:focus-visible, textarea:focus-visible, select:focus-visible {
-  outline: 1px solid #c4956f;
-  outline-offset: 2px;
-}
-
-html.dark input:focus-visible, html.dark textarea:focus-visible, html.dark select:focus-visible {
-  outline-color: #d4a574;
-}
-
-/* Smooth fade-in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+@layer base {
+  html {
+    scroll-behavior: smooth;
   }
-  to {
-    opacity: 1;
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-light-bg font-sans text-base text-light-text antialiased transition-colors dark:bg-dark-bg dark:text-dark-text;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif font-normal tracking-wide;
+  }
+
+  :focus-visible {
+    @apply outline outline-1 outline-offset-2 outline-light-link dark:outline-dark-accent;
+  }
+
+  button {
+    @apply cursor-pointer;
   }
 }
 
-.fade-in {
-  animation: fadeIn 150ms ease-in-out;
-}
-
-/* Skeleton loading state */
-@keyframes shimmer {
-  0% {
-    opacity: 0.6;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-  50% {
-    opacity: 0.8;
-  }
-  100% {
-    opacity: 0.6;
-  }
-}
 
-.skeleton {
-  background-color: #f0e8dc;
-  animation: shimmer 2s infinite;
-}
-
-html.dark .skeleton {
-  background-color: #3d3733;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

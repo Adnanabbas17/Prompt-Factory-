@@ -1,27 +1,17 @@
+import data from '@/public/data/prompts.json';
 import { Prompt, SearchFilters } from './types';
 
-let promptsCache: Prompt[] = [];
+export const prompts: Prompt[] = (data as { prompts: Prompt[] }).prompts;
 
-export async function loadPrompts(): Promise<Prompt[]> {
-  if (promptsCache.length > 0) {
-    return promptsCache;
-  }
-
-  const response = await fetch('/data/prompts.json');
-  const data = await response.json();
-  promptsCache = data.prompts || [];
-  return promptsCache;
-}
-
-export function getPromptById(id: string, prompts: Prompt[]): Prompt | undefined {
+export function getPromptById(id: string): Prompt | undefined {
   return prompts.find((p) => p.id === id);
 }
 
-export function searchPrompts(filters: SearchFilters, prompts: Prompt[]): Prompt[] {
-  let results = [...prompts];
+export function searchPrompts(filters: SearchFilters, list: Prompt[] = prompts): Prompt[] {
+  let results = list;
+  const query = filters.query.trim().toLowerCase();
 
-  if (filters.query) {
-    const query = filters.query.toLowerCase();
+  if (query) {
     results = results.filter(
       (p) =>
         p.title.toLowerCase().includes(query) ||
@@ -38,13 +28,11 @@ export function searchPrompts(filters: SearchFilters, prompts: Prompt[]): Prompt
     results = results.filter((p) => p.difficulty === filters.difficulty);
   }
 
-  results = sortPrompts(results, filters.sortBy);
-
-  return results;
+  return sortPrompts(results, filters.sortBy);
 }
 
-function sortPrompts(prompts: Prompt[], sortBy: 'recent' | 'popular' | 'rating'): Prompt[] {
-  const sorted = [...prompts];
+function sortPrompts(list: Prompt[], sortBy: SearchFilters['sortBy']): Prompt[] {
+  const sorted = [...list];
 
   switch (sortBy) {
     case 'popular':
@@ -57,8 +45,6 @@ function sortPrompts(prompts: Prompt[], sortBy: 'recent' | 'popular' | 'rating')
   }
 }
 
-export function getRelatedPrompts(prompt: Prompt, prompts: Prompt[], limit: number = 3): Prompt[] {
-  return prompts
-    .filter((p) => p.category === prompt.category && p.id !== prompt.id)
-    .slice(0, limit);
+export function getRelatedPrompts(prompt: Prompt, limit = 3): Prompt[] {
+  return prompts.filter((p) => p.category === prompt.category && p.id !== prompt.id).slice(0, limit);
 }

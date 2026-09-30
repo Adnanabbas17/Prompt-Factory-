@@ -9,8 +9,8 @@
 
 ✨ **Minimal, Aesthetic Design**
 - Clean, distraction-free UI with generous whitespace
-- Anthropic Sans font throughout
-- No clutter, gradients, or heavy shadows
+- Serif headings (Georgia/Garamond) with a Segoe UI body, no external fonts
+- No clutter or gradients, only soft shadows
 - Sharp modern cards (no rounded corners)
 
 🔍 **Search & Discovery**
@@ -117,7 +117,6 @@ prompt-factory/
 | **React 18** | UI library | 18.3+ |
 | **TypeScript** | Type safety | 5.4+ |
 | **Tailwind CSS** | Utility-first styling | 3.4+ |
-| **Anthropic Sans** | Brand font (CDN) | Latest |
 
 ## Data Schema
 
@@ -149,47 +148,40 @@ Prompts are stored in `/public/data/prompts.json`:
 ### Color Palette
 
 **Light Mode:**
-- Background: `#FFFFFF`
-- Surface: `#F9FAFB`
-- Text Primary: `#111827`
-- Text Secondary: `#6B7280`
-- Accent: `#3B82F6`
+- Background: `#FFFAF5`
+- Surface: `#F9F5F0`
+- Text Primary: `#3D3D3D`
+- Text Secondary: `#6B6B5F`
+- Accent (borders, icons): `#C4956F`
+- Link / button (WCAG AA text): `#8F613C`
 
 **Dark Mode:**
-- Background: `#0F172A`
-- Surface: `#1E293B`
-- Text Primary: `#F1F5F9`
-- Text Secondary: `#94A3B8`
-- Accent: `#60A5FA`
+- Background: `#1A1815`
+- Surface: `#2A2520`
+- Text Primary: `#F5F0EB`
+- Text Secondary: `#A89F94`
+- Accent: `#D4A574`
 
-**Category Colors** (static):
-- Writing: `#A78BFA` (Purple)
-- Coding: `#34D399` (Green)
-- Analysis: `#F97316` (Orange)
-- Brainstorm: `#EC4899` (Pink)
-- Teaching: `#06B6D4` (Teal)
+**Category colors** live in `lib/constants.ts` (darker shades in light mode for contrast).
 
 ### Typography
 
-- **Font Family**: Anthropic Sans (CDN) + system fallback
-- **Headings**: 500 weight, +0.3px letter-spacing
-- **Body**: 15px, 1.5 line-height, 400 weight
-- **Sizes**: H1 (32px), H2 (24px), H3 (20px), Body (15px)
+- **Headings**: Georgia / Garamond serif, light weight, +0.5px letter-spacing
+- **Body**: Segoe UI / system sans, 16px, 1.6 line-height
+- **Sizes**: H1 48-60px, H2 36px, H3 24px, Body 16px
 
 ### Spacing & Layout
 
-- **Gap**: 20px mobile, 32px desktop
-- **Container Max-Width**: 1120px
-- **Padding**: 20px mobile, 40px desktop
-- **Header Height**: 60px
-- **Section Gaps**: 60px vertical
+- **Container Max-Width**: 1280px (`max-w-7xl`), detail page 896px
+- **Padding**: 24px mobile, 40px desktop
+- **Header Height**: 64px
+- **Section Gaps**: generous (48-96px)
 
 ### Interactive States
 
-- **Hover**: 10% opacity change + 1% scale (subtle)
-- **Focus**: 2px outline ring (blue accent)
-- **Transitions**: 150ms ease-in-out (smooth)
-- **Animations**: Fade-in on hover (smooth)
+- **Hover**: subtle opacity change, copy button revealed on hover, focus, and always on touch
+- **Focus**: 1px gold outline (`:focus-visible`)
+- **Transitions**: 200ms ease-in-out, disabled for `prefers-reduced-motion`
 
 ## Component Features
 

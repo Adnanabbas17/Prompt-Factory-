@@ -26,7 +26,8 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
     <div className="w-full max-w-2xl mx-auto mb-16">
       <div className="relative">
         <svg
-          className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-light-accent dark:text-dark-accent pointer-events-none opacity-60"
+          className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-light-accent dark:text-dark-accent pointer-events-none"
+          aria-hidden="true"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -41,8 +42,9 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
 
         <input
           ref={inputRef}
-          type="text"
-          placeholder="Search prompts... (⌘ + K)"
+          type="search"
+          aria-label="Search prompts"
+          placeholder="Search prompts... (Ctrl/⌘ + K)"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           className="w-full pl-14 pr-5 py-4 text-base border-b-2 border-light-border dark:border-dark-border bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text placeholder-light-text-secondary dark:placeholder-dark-text-secondary focus-visible:outline-none focus-visible:border-light-accent dark:focus-visible:border-dark-accent transition-colors"

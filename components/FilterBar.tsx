@@ -1,7 +1,6 @@
 'use client';
 
-const CATEGORIES = ['Writing', 'Coding', 'Analysis', 'Brainstorm', 'Teaching'];
-const DIFFICULTIES = ['Beginner', 'Intermediate', 'Advanced'];
+import { CATEGORIES, DIFFICULTIES } from '@/lib/constants';
 
 interface FilterBarProps {
   selectedCategories: string[];
@@ -31,11 +30,13 @@ export default function FilterBar({
           {CATEGORIES.map((category) => (
             <button
               key={category}
+              type="button"
+              aria-pressed={selectedCategories.includes(category)}
               onClick={() => onCategoryChange(category)}
-              className={`text-sm px-0 py-2 transition-colors ${
+              className={`border-b-2 px-0 py-2 text-sm transition-colors ${
                 selectedCategories.includes(category)
-                  ? 'text-light-text dark:text-dark-text border-b-2 border-light-accent dark:border-dark-accent font-medium'
-                  : 'text-light-text-secondary dark:text-dark-text-secondary hover:text-light-text dark:hover:text-dark-text'
+                  ? 'border-light-accent font-medium text-light-text dark:border-dark-accent dark:text-dark-text'
+                  : 'border-transparent text-light-text-secondary hover:text-light-text dark:text-dark-text-secondary dark:hover:text-dark-text'
               }`}
             >
               {category}
@@ -80,6 +81,7 @@ export default function FilterBar({
 
         {hasActiveFilters && (
           <button
+            type="button"
             onClick={onReset}
             className="text-sm text-light-text-secondary dark:text-dark-text-secondary hover:text-light-text dark:hover:text-dark-text underline transition-colors ml-auto"
           >

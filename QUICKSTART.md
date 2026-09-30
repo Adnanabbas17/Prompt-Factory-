@@ -54,7 +54,7 @@ Or deploy directly to **Vercel** for free:
 - ✅ **Dark mode toggle** (persists in localStorage)
 - ✅ **Mobile responsive** (mobile, tablet, desktop)
 - ✅ **Keyboard accessible** (Tab, Enter, Escape, Cmd+K)
-- ✅ **Anthropic Sans font** throughout
+- ✅ **Serif headings + system sans body** (no external fonts)
 - ✅ **Minimal aesthetic** (generous whitespace, no clutter)
 
 ## 📁 Project Structure
@@ -124,8 +124,8 @@ Edit `tailwind.config.js`:
 - Accent colors
 
 ### Modify Theme
-Edit `app/globals.css`:
-- Font family (Anthropic Sans or other)
+Edit `tailwind.config.js` (colors, fonts) and `app/globals.css` (base styles):
+- Font families (`tailwind.config.js`)
 - Spacing values
 - Typography scales
 
@@ -135,7 +135,6 @@ Edit `app/globals.css`:
 - **React 18** — UI library
 - **TypeScript** — Type safety
 - **Tailwind CSS 3.4** — Utility styling
-- **Anthropic Sans** — Brand font (CDN)
 
 ## 📊 Build Output
 
