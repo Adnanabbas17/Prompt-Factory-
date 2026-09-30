@@ -76,6 +76,15 @@ module.exports = {
       transitionDuration: {
         DEFAULT: '150ms',
       },
+      animation: {
+        fadeIn: 'fadeIn 150ms ease-in-out',
+      },
+      keyframes: {
+        fadeIn: {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+      },
     },
   },
   darkMode: 'class',
