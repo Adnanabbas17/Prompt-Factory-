@@ -25,17 +25,17 @@ export default function FilterBar({
   onReset,
 }: FilterBarProps) {
   return (
-    <div className="w-full max-w-7xl mx-auto mb-12 space-y-4">
-      <div className="flex flex-wrap gap-4 items-center">
-        <div className="flex flex-wrap gap-3">
+    <div className="w-full max-w-7xl mx-auto mb-16 space-y-4">
+      <div className="flex flex-wrap gap-6 items-center">
+        <div className="flex flex-wrap gap-6">
           {CATEGORIES.map((category) => (
             <button
               key={category}
               onClick={() => onCategoryChange(category)}
-              className={`text-sm px-3 py-1 transition-colors ${
+              className={`text-sm px-0 py-2 transition-colors ${
                 selectedCategories.includes(category)
-                  ? 'text-gray-900 dark:text-gray-100 border-b-2 border-blue-500'
-                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
+                  ? 'text-light-text dark:text-dark-text border-b-2 border-light-accent dark:border-dark-accent font-medium'
+                  : 'text-light-text-secondary dark:text-dark-text-secondary hover:text-light-text dark:hover:text-dark-text'
               }`}
             >
               {category}
@@ -43,15 +43,15 @@ export default function FilterBar({
           ))}
         </div>
 
-        <div className="flex items-center gap-2">
-          <label htmlFor="difficulty" className="text-sm text-gray-600 dark:text-gray-400">
+        <div className="flex items-center gap-3">
+          <label htmlFor="difficulty" className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
             Difficulty:
           </label>
           <select
             id="difficulty"
             value={selectedDifficulty || ''}
             onChange={(e) => onDifficultyChange(e.target.value || null)}
-            className="text-sm px-3 py-1 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100 focus-visible:outline-none focus-visible:border-blue-500 dark:focus-visible:border-blue-400"
+            className="text-sm px-3 py-2 border-b-2 border-light-border dark:border-dark-border bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text focus-visible:outline-none focus-visible:border-light-accent dark:focus-visible:border-dark-accent transition-colors"
           >
             <option value="">All</option>
             {DIFFICULTIES.map((difficulty) => (
@@ -62,15 +62,15 @@ export default function FilterBar({
           </select>
         </div>
 
-        <div className="flex items-center gap-2">
-          <label htmlFor="sort" className="text-sm text-gray-600 dark:text-gray-400">
+        <div className="flex items-center gap-3">
+          <label htmlFor="sort" className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
             Sort:
           </label>
           <select
             id="sort"
             value={sortBy}
             onChange={(e) => onSortChange(e.target.value as 'recent' | 'popular' | 'rating')}
-            className="text-sm px-3 py-1 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100 focus-visible:outline-none focus-visible:border-blue-500 dark:focus-visible:border-blue-400"
+            className="text-sm px-3 py-2 border-b-2 border-light-border dark:border-dark-border bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text focus-visible:outline-none focus-visible:border-light-accent dark:focus-visible:border-dark-accent transition-colors"
           >
             <option value="recent">Recent</option>
             <option value="popular">Popular</option>
@@ -81,7 +81,7 @@ export default function FilterBar({
         {hasActiveFilters && (
           <button
             onClick={onReset}
-            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 underline transition-colors ml-auto"
+            className="text-sm text-light-text-secondary dark:text-dark-text-secondary hover:text-light-text dark:hover:text-dark-text underline transition-colors ml-auto"
           >
             Reset filters
           </button>

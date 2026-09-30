@@ -10,11 +10,11 @@ interface PromptCardProps {
 }
 
 const categoryColors: Record<string, string> = {
-  Writing: '#A78BFA',
-  Coding: '#34D399',
-  Analysis: '#F97316',
-  Brainstorm: '#EC4899',
-  Teaching: '#06B6D4',
+  Writing: '#C9A87A',
+  Coding: '#8FA87A',
+  Analysis: '#C4956F',
+  Brainstorm: '#B8899F',
+  Teaching: '#7FA8A3',
 };
 
 export default function PromptCard({ prompt }: PromptCardProps) {
@@ -22,16 +22,16 @@ export default function PromptCard({ prompt }: PromptCardProps) {
 
   return (
     <div
-      className="border-b border-gray-200 dark:border-gray-700 pb-8 transition-all duration-150 group"
+      className="border-b-2 border-light-border dark:border-dark-border pb-10 transition-all duration-200 group"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
       <div className="flex items-start justify-between gap-4">
-        <Link href={`/prompts/${prompt.id}`} className="flex-1 group">
-          <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2 group-hover:opacity-70 transition-opacity">
+        <Link href={`/prompts/${prompt.id}`} className="flex-1">
+          <h3 className="text-2xl font-serif text-light-text dark:text-dark-text mb-3 group-hover:opacity-75 transition-opacity">
             {prompt.title}
           </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-3">
+          <p className="text-base text-light-text-secondary dark:text-dark-text-secondary line-clamp-2 mb-4 leading-relaxed">
             {prompt.description}
           </p>
         </Link>
@@ -43,7 +43,7 @@ export default function PromptCard({ prompt }: PromptCardProps) {
         )}
       </div>
 
-      <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500 dark:text-gray-500">
+      <div className="flex flex-wrap items-center gap-3 text-sm text-light-text-secondary dark:text-dark-text-secondary">
         <span>{prompt.author}</span>
         <span>•</span>
         <span
@@ -55,7 +55,7 @@ export default function PromptCard({ prompt }: PromptCardProps) {
           {prompt.category}
         </span>
         <span>•</span>
-        <span className="text-gray-600 dark:text-gray-400">{prompt.difficulty}</span>
+        <span>{prompt.difficulty}</span>
       </div>
     </div>
   );

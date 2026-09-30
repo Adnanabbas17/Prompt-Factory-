@@ -26,7 +26,7 @@ export default function CopyButton({ text, variant = 'large' }: CopyButtonProps)
         onClick={handleCopy}
         aria-label="Copy to clipboard"
         title={copied ? 'Copied!' : 'Copy to clipboard'}
-        className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
+        className="p-2 text-light-text-secondary dark:text-dark-text-secondary hover:text-light-accent dark:hover:text-dark-accent transition-colors"
       >
         {copied ? (
           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -53,7 +53,7 @@ export default function CopyButton({ text, variant = 'large' }: CopyButtonProps)
   return (
     <button
       onClick={handleCopy}
-      className="px-6 py-3 bg-blue-500 dark:bg-blue-600 text-white font-medium text-sm rounded-sm hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
+      className="px-8 py-4 bg-light-accent dark:bg-dark-accent text-white font-serif font-light text-base rounded-none hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-light-accent dark:focus-visible:ring-dark-accent shadow-sm hover:shadow-md"
     >
       {copied ? '✓ Copied!' : 'Copy to Clipboard'}
     </button>

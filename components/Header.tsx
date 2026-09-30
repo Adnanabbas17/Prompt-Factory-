@@ -35,10 +35,10 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900 backdrop-blur-sm bg-opacity-95 dark:bg-opacity-95">
-      <div className="max-w-7xl mx-auto px-5 md:px-10 h-15 flex items-center justify-between">
+    <header className="sticky top-0 z-50 border-b border-light-border dark:border-dark-border bg-light-bg dark:bg-dark-bg shadow-sm">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="text-xl font-bold text-gray-900 dark:text-gray-100 group-hover:opacity-80 transition-opacity">
+          <div className="text-2xl font-serif font-light text-light-text dark:text-dark-text group-hover:opacity-75 transition-opacity">
             Prompt Factory
           </div>
         </Link>
@@ -48,7 +48,7 @@ export default function Header() {
             href="https://github.com/adnanabbas17/prompt-factory-"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+            className="text-sm text-light-text-secondary dark:text-dark-text-secondary hover:text-light-text dark:hover:text-dark-text hover:underline transition-colors"
           >
             GitHub
           </a>
@@ -56,7 +56,7 @@ export default function Header() {
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            className="p-2 text-light-text-secondary dark:text-dark-text-secondary hover:text-light-text dark:hover:text-dark-text transition-colors"
           >
             {isDark ? (
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
