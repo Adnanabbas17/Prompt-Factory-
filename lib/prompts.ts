@@ -1,9 +1,9 @@
 import { Prompt, SearchFilters } from './types';
 
-let promptsCache: Prompt[] | null = null;
+let promptsCache: Prompt[] = [];
 
 export async function loadPrompts(): Promise<Prompt[]> {
-  if (promptsCache) {
+  if (promptsCache.length > 0) {
     return promptsCache;
   }
 
