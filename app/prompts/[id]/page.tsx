@@ -58,6 +58,12 @@ export default function PromptPage({ params }: PromptPageProps) {
         <time dateTime={prompt.createdAt}>{createdAt}</time>
       </div>
 
+      {prompt.content.includes('{{') && (
+        <p className="mb-4 text-sm text-light-text-secondary dark:text-dark-text-secondary">
+          Replace the {'{{PLACEHOLDERS}}'} with your own input before use.
+        </p>
+      )}
+
       <div className="mb-16 border-2 border-light-border bg-light-surface p-6 shadow-sm dark:border-dark-border dark:bg-dark-surface md:p-10">
         <pre className="whitespace-pre-wrap break-words font-mono text-sm leading-relaxed text-light-text dark:text-dark-text">
           {prompt.content}

@@ -35,6 +35,9 @@ export default function Footer() {
               Adnan Abbas
             </a>
           </p>
+          <p className="mt-3">
+            Includes prompts from thibaultyou/prompt-library (MIT License, Copyright (c) 2024 Thibault YOU)
+          </p>
           <p className="mt-3">© {new Date().getFullYear()} Prompt Factory. All rights reserved.</p>
         </div>
       </div>
