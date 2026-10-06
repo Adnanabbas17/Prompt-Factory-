@@ -76,7 +76,7 @@ prompt-factory/
 │   ├── types.ts                # TypeScript interfaces
 │   └── prompts.ts              # Utility functions
 ├── public/data/
-│   └── prompts.json            # 157 curated prompts (generated, see README)
+│   └── prompts.json            # 155 curated prompts (generated, see README)
 └── [configs]
     ├── next.config.js
     ├── tailwind.config.js

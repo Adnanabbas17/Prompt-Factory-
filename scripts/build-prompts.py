@@ -20,6 +20,7 @@ Parsing rules (the structure is verified, and the script stops if it does not ho
     Heading2  "<N>. <Title>"           starts a prompt
     next line "Source: <src>  |  Licence: <lic>  [|  Variables: a, b]"
     the remaining paragraphs up to the next heading are the body
+Prompts listed in EXCLUDE are parsed and checked, then left out of the output.
 """
 
 import json
@@ -37,6 +38,13 @@ OUT_PATH = ROOT / 'public' / 'data' / 'prompts.json'
 METADATA_PATH = Path(__file__).resolve().parent / 'prompt-metadata.json'
 
 CREATED_AT = '2026-10-06'
+
+# Prompts left out of the output, keyed by their number in the docx. The title guards
+# against the docx being renumbered. Each entry: (title, one-line reason).
+EXCLUDE = {
+    37: ('Project Manager', 'Written as a reply to a PRD request, not as an instruction to the model.'),
+    60: ('Salesperson', 'Tells the model to make a product look more valuable than it is to push a sale.'),
+}
 
 # Source line value in the docx -> app fields.
 SOURCES = {
@@ -191,6 +199,12 @@ def difficulty(content, variables):
 
 def build(docx_path):
     prompts = parse_docx(docx_path)
+    for number, (title, reason) in EXCLUDE.items():
+        found = [p for p in prompts if p['number'] == number]
+        if len(found) != 1 or found[0]['title'] != title:
+            raise BuildError(f'EXCLUDE expects prompt {number} to be {title!r}')
+        print(f'excluded {number}. {title}: {reason}')
+    prompts = [p for p in prompts if p['number'] not in EXCLUDE]
     assign_ids(prompts)
 
     metadata = json.loads(METADATA_PATH.read_text(encoding='utf-8'))

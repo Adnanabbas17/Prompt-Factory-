@@ -24,13 +24,15 @@ ROOT = Path(__file__).resolve().parent.parent
 JSON_PATH = ROOT / 'public' / 'data' / 'prompts.json'
 CONSTANTS_PATH = ROOT / 'lib' / 'constants.ts'
 
-EXPECTED_TOTAL = 157
-EXPECTED_WITH_VARIABLES = 64
+DOCX_TOTAL = 157  # numbered prompt headings in the docx
+EXCLUDED = {37: 'Project Manager', 60: 'Salesperson'}  # must match EXCLUDE in build-prompts.py
+EXPECTED_TOTAL = DOCX_TOTAL - len(EXCLUDED)
+EXPECTED_WITH_VARIABLES = 64  # neither excluded prompt has variables
 EXPECTED_CATEGORIES = {
     'Writing & Editing': 17,
     'Career & Job Search': 16,
-    'Business, Strategy & Product': 22,
-    'Marketing, Sales & Support': 14,
+    'Business, Strategy & Product': 21,
+    'Marketing, Sales & Support': 13,
     'Productivity & Meetings': 7,
     'Coding & Software Engineering': 29,
     'Data, Research & Analysis': 10,
@@ -39,7 +41,7 @@ EXPECTED_CATEGORIES = {
     'Personal & Lifestyle': 8,
     'Creative Writing': 9,
 }
-EXPECTED_SOURCES = {'prompts.chat': 139, 'LLM-Prompt-Library (abilzerian)': 18}
+EXPECTED_SOURCES = {'prompts.chat': 137, 'LLM-Prompt-Library (abilzerian)': 18}
 SOURCE_RULES = {
     'prompts.chat': ('CC0-1.0', 'https://github.com/f/prompts.chat'),
     'LLM-Prompt-Library (abilzerian)': ('MIT', 'https://github.com/abilzerian/LLM-Prompt-Library'),
@@ -104,11 +106,14 @@ def main(argv):
     raw_text = '\n'.join(t for _, t in paragraphs)
     raw_norm = norm(raw_text)
     raw_lines = '\n' + '\n'.join('' if t == ' ' else t for _, t in paragraphs) + '\n'
-    docx_titles, docx_sources = [], []
+    docx_all = []  # (number, title, source line) for every numbered heading
     for i, (style, text) in enumerate(paragraphs):
-        if style == 'Heading2' and re.match(r'^\d+\. ', text):
-            docx_titles.append(re.sub(r'^\d+\. ', '', text))
-            docx_sources.append(paragraphs[i + 1][1])
+        m = re.match(r'^(\d+)\. (.*)$', text)
+        if style == 'Heading2' and m:
+            docx_all.append((int(m.group(1)), m.group(2), paragraphs[i + 1][1]))
+    docx_by_number = {n: t for n, t, _ in docx_all}
+    docx_titles = [t for n, t, _ in docx_all if n not in EXCLUDED]
+    docx_sources = [src for n, _, src in docx_all if n not in EXCLUDED]
     docx_variables = []
     for line in docx_sources:
         m = re.search(r'\|\s*Variables:\s*(.*)$', line)
@@ -116,7 +121,9 @@ def main(argv):
 
     print('Counts')
     r.check(len(prompts) == EXPECTED_TOTAL, f'total is {EXPECTED_TOTAL}', f'found {len(prompts)}')
-    r.check(len(docx_titles) == EXPECTED_TOTAL, f'docx has {EXPECTED_TOTAL} numbered prompt headings', f'found {len(docx_titles)}')
+    r.check(len(docx_all) == DOCX_TOTAL, f'docx has {DOCX_TOTAL} numbered prompt headings', f'found {len(docx_all)}')
+    r.check(all(docx_by_number.get(n) == t for n, t in EXCLUDED.items()), 'excluded prompts are the expected docx entries', str(EXCLUDED))
+    r.check(not any(p['title'] in EXCLUDED.values() for p in prompts), 'excluded prompts are absent from the JSON')
     cat_counts = Counter(p['category'] for p in prompts)
     for name, expected in EXPECTED_CATEGORIES.items():
         r.check(cat_counts.get(name, 0) == expected, f'category {name}: {expected}', f'found {cat_counts.get(name, 0)}')

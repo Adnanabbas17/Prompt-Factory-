@@ -127,7 +127,7 @@ prompt-factory/
 
 ## Data Schema
 
-Prompts are stored in `/public/data/prompts.json` (157 curated prompts, generated from the curated `.docx`, see [Updating the Prompt Library](#updating-the-prompt-library)):
+Prompts are stored in `/public/data/prompts.json` (155 curated prompts, generated from the curated `.docx`, see [Updating the Prompt Library](#updating-the-prompt-library)):
 
 ```json
 {
@@ -293,7 +293,7 @@ python3 scripts/validate-prompts.py path/to/Curated-Prompt-Library.docx
 - `description`, `useCase` and `tags` are kept in `scripts/prompt-metadata.json`, keyed by prompt `id`. The build stops if a prompt has no entry or an entry has no prompt.
 - `difficulty` is rule-based: Advanced if content is over 2000 characters or there are 3+ variables; Beginner if there are no variables and content is under 600 characters; otherwise Intermediate.
 - Categories live in `lib/constants.ts`. The validator checks that list against the data.
-- `validate-prompts.py` expects the current library (157 prompts, 11 categories). If the library changes on purpose, update the expected numbers at the top of that script.
+- `validate-prompts.py` expects the current library (155 prompts, 11 categories; the docx has 157 and `EXCLUDE` in `build-prompts.py` leaves out 2). If the library changes on purpose, update the expected numbers at the top of that script.
 
 ## Deployment
 

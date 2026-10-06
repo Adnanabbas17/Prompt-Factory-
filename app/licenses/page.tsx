@@ -33,8 +33,8 @@ export default function LicensesPage() {
 
       <h1 className="mb-8 text-5xl font-light text-light-text dark:text-dark-text md:text-6xl">Licenses</h1>
       <p className={`${bodyClass} mb-16 max-w-2xl`}>
-        The prompts in Prompt Factory come from two open-licensed GitHub repositories. Prompts are reproduced
-        unmodified from their sources, including original typos.
+        The prompts in Prompt Factory come from two open-licensed GitHub repositories. Prompt text is reproduced from
+        the sources with whitespace normalisation only.
       </p>
 
       <section className="mb-16 border-t-2 border-light-border pt-12 dark:border-dark-border">
@@ -75,8 +75,7 @@ export default function LicensesPage() {
           .
         </p>
         <p className={`${bodyClass} mb-8`}>
-          LLM-Prompt-Library prompts are MIT licensed and are reproduced unmodified. The copyright and permission
-          notice below applies to them.
+          LLM-Prompt-Library prompts are MIT licensed. The copyright and permission notice below applies to them.
         </p>
 
         <div className="space-y-4 border-2 border-light-border bg-light-surface p-6 text-sm leading-relaxed text-light-text shadow-sm dark:border-dark-border dark:bg-dark-surface dark:text-dark-text md:p-10">
