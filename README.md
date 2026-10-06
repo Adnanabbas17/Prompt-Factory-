@@ -14,11 +14,11 @@
 - Sharp modern cards (no rounded corners)
 
 🔍 **Search & Discovery**
-- Real-time search across title, description, and tags
+- Real-time search across title, description, tags, and prompt text
 - Debounced search (300ms)
 - Filter by category (multi-select)
 - Filter by difficulty level (single-select)
-- Sort by recent, popular, or rating
+- Prompts are listed in library order
 
 🌙 **Dark Mode Support**
 - Native dark mode with class-based toggle
@@ -37,8 +37,9 @@
 
 🏠 **Individual Prompt Pages**
 - Full prompt content with proper formatting
-- Metadata display (author, category, difficulty, date)
-- Usage statistics (rating, usage count)
+- Metadata display (source, category, difficulty, date)
+- Source, license, and a link to the source repository
+- Prompt text shown exactly as written (never rendered as markdown)
 - Related prompts from same category
 - Shareable URLs for each prompt
 
@@ -88,6 +89,7 @@ prompt-factory/
 │   ├── page.tsx                # Homepage (search + filter)
 │   ├── prompts/
 │   │   └── [id]/page.tsx       # Prompt detail page
+│   ├── licenses/page.tsx       # Sources and license texts
 │   └── globals.css             # Global Tailwind + custom styles
 ├── components/
 │   ├── Header.tsx              # Navigation & theme toggle
@@ -98,7 +100,12 @@ prompt-factory/
 │   └── CopyButton.tsx          # Copy-to-clipboard button
 ├── lib/
 │   ├── prompts.ts             # Utility functions (load, search, filter)
+│   ├── constants.ts           # Categories (single source of truth) and colors
 │   └── types.ts               # TypeScript interfaces
+├── scripts/
+│   ├── build-prompts.py       # .docx -> public/data/prompts.json
+│   ├── validate-prompts.py    # Checks the JSON against the .docx
+│   └── prompt-metadata.json   # description, useCase, tags per prompt id
 ├── public/
 │   └── data/
 │       └── prompts.json       # Prompt database (static JSON)
@@ -120,7 +127,7 @@ prompt-factory/
 
 ## Data Schema
 
-Prompts are stored in `/public/data/prompts.json`:
+Prompts are stored in `/public/data/prompts.json` (157 curated prompts, generated from the curated `.docx`, see [Updating the Prompt Library](#updating-the-prompt-library)):
 
 ```json
 {
@@ -128,20 +135,24 @@ Prompts are stored in `/public/data/prompts.json`:
     {
       "id": "unique-slug",
       "title": "Prompt Title",
-      "description": "Short description",
-      "category": "Writing|Coding|Analysis|Brainstorm|Teaching",
+      "description": "Short description (max 140 chars)",
+      "category": "One of the 11 names in lib/constants.ts",
       "tags": ["tag1", "tag2"],
-      "author": "Author Name",
-      "content": "Full prompt text",
-      "useCase": "Specific use case",
+      "author": "Source name",
+      "source": "Source name",
+      "license": "CC0-1.0|MIT",
+      "sourceUrl": "https://github.com/...",
+      "content": "Full prompt text, verbatim",
+      "useCase": "When to use it (max 80 chars)",
       "difficulty": "Beginner|Intermediate|Advanced",
-      "createdAt": "2026-09-30",
-      "rating": 4.5,
-      "usageCount": 150
+      "variables": ["name"],
+      "createdAt": "2026-10-06"
     }
   ]
 }
 ```
+
+`rating` and `usageCount` are optional and not present in the curated library. The UI hides them when absent.
 
 ## Design Specifications
 
@@ -195,13 +206,12 @@ Prompts are stored in `/public/data/prompts.json`:
 ### SearchBar
 - Real-time search with 300ms debounce
 - Keyboard shortcut: `Cmd/Ctrl + K` to focus
-- Search across: title, description, tags
+- Search across: title, description, tags, prompt text
 - Priority ranking (title > description > tags)
 
 ### FilterBar
 - Multi-select categories (underline on selected)
 - Single-select difficulty dropdown
-- Sort options: recent, popular, rating
 - "Reset filters" link (appears when active)
 - Live updates (no apply button)
 
@@ -213,9 +223,8 @@ Prompts are stored in `/public/data/prompts.json`:
 - Fully keyboard accessible
 
 ### Detail Page
-- Full prompt content with code formatting
-- Complete metadata display
-- Usage statistics (rating, usage count)
+- Full prompt content, whitespace preserved, shown exactly as written
+- Complete metadata display, including source, license, and a link to the source repository
 - Related prompts from same category
 - Shareable URLs (`/prompts/[id]`)
 
@@ -271,19 +280,20 @@ npx tsc --noEmit
 - Lazy loading for dynamic routes
 - Theme persistence (localStorage)
 
-## Adding New Prompts
+## Updating the Prompt Library
 
-1. Edit `/public/data/prompts.json`
-2. Add new object to `prompts` array with required fields
-3. Restart dev server (if running)
-4. New prompts appear immediately
+The library is generated from `Curated-Prompt-Library.docx` (not stored in this repo). Python 3 only, no packages to install.
 
-**Required Fields:**
-- `id` (unique slug, URL-safe)
-- `title`, `description`, `category`
-- `content`, `useCase`
-- `author`, `difficulty`
-- `tags`, `createdAt`, `rating`, `usageCount`
+```bash
+python3 scripts/build-prompts.py path/to/Curated-Prompt-Library.docx
+python3 scripts/validate-prompts.py path/to/Curated-Prompt-Library.docx
+```
+
+- Prompt text is extracted as raw paragraph text, never converted through markdown, so literal `#`, `**`, backticks and backslashes stay as written.
+- `description`, `useCase` and `tags` are kept in `scripts/prompt-metadata.json`, keyed by prompt `id`. The build stops if a prompt has no entry or an entry has no prompt.
+- `difficulty` is rule-based: Advanced if content is over 2000 characters or there are 3+ variables; Beginner if there are no variables and content is under 600 characters; otherwise Intermediate.
+- Categories live in `lib/constants.ts`. The validator checks that list against the data.
+- `validate-prompts.py` expects the current library (157 prompts, 11 categories). If the library changes on purpose, update the expected numbers at the top of that script.
 
 ## Deployment
 

@@ -90,19 +90,43 @@ export default function PromptPage({ params }: PromptPageProps) {
 
       <div className="mb-20 grid grid-cols-1 gap-12 sm:grid-cols-2">
         <div>
-          <p className={labelClass}>Rating</p>
-          <p className="font-serif text-4xl font-light text-light-text dark:text-dark-text">
-            {prompt.rating.toFixed(1)}
-            <span className="text-lg text-light-text-secondary dark:text-dark-text-secondary"> / 5</span>
+          <h2 className={labelClass}>Source</h2>
+          <p className="text-base leading-relaxed text-light-text dark:text-dark-text">{prompt.source}</p>
+          <p className="text-sm leading-relaxed text-light-text-secondary dark:text-dark-text-secondary">
+            License: {prompt.license}
+          </p>
+          <p className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-sm">
+            <a
+              href={prompt.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-light-link hover:underline dark:text-dark-accent"
+            >
+              View source repository
+            </a>
+            <Link href="/licenses" className="text-light-link hover:underline dark:text-dark-accent">
+              License details
+            </Link>
           </p>
         </div>
-        <div>
-          <p className={labelClass}>Usage Count</p>
-          <p className="font-serif text-4xl font-light text-light-text dark:text-dark-text">
-            {prompt.usageCount.toLocaleString('en-US')}
-            <span className="text-lg text-light-text-secondary dark:text-dark-text-secondary"> uses</span>
-          </p>
-        </div>
+        {prompt.rating !== undefined && (
+          <div>
+            <p className={labelClass}>Rating</p>
+            <p className="font-serif text-4xl font-light text-light-text dark:text-dark-text">
+              {prompt.rating.toFixed(1)}
+              <span className="text-lg text-light-text-secondary dark:text-dark-text-secondary"> / 5</span>
+            </p>
+          </div>
+        )}
+        {prompt.usageCount !== undefined && (
+          <div>
+            <p className={labelClass}>Usage Count</p>
+            <p className="font-serif text-4xl font-light text-light-text dark:text-dark-text">
+              {prompt.usageCount.toLocaleString('en-US')}
+              <span className="text-lg text-light-text-secondary dark:text-dark-text-secondary"> uses</span>
+            </p>
+          </div>
+        )}
       </div>
 
       {related.length > 0 && (

@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from 'react';
 import SearchBar from '@/components/SearchBar';
 import FilterBar from '@/components/FilterBar';
 import PromptCard from '@/components/PromptCard';
-import { SearchFilters } from '@/lib/types';
 import { prompts, searchPrompts } from '@/lib/prompts';
 
 export default function HomePage() {
@@ -12,7 +11,6 @@ export default function HomePage() {
   const [debouncedQuery, setDebouncedQuery] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedDifficulty, setSelectedDifficulty] = useState<string | null>(null);
-  const [sortBy, setSortBy] = useState<SearchFilters['sortBy']>('recent');
 
   useEffect(() => {
     const timer = setTimeout(() => setDebouncedQuery(query), 200);
@@ -25,9 +23,8 @@ export default function HomePage() {
         query: debouncedQuery,
         categories: selectedCategories,
         difficulty: selectedDifficulty,
-        sortBy,
       }),
-    [debouncedQuery, selectedCategories, selectedDifficulty, sortBy]
+    [debouncedQuery, selectedCategories, selectedDifficulty]
   );
 
   const handleCategoryToggle = (category: string) => {
@@ -41,11 +38,9 @@ export default function HomePage() {
     setDebouncedQuery('');
     setSelectedCategories([]);
     setSelectedDifficulty(null);
-    setSortBy('recent');
   };
 
-  const hasActiveFilters =
-    query.length > 0 || selectedCategories.length > 0 || selectedDifficulty !== null || sortBy !== 'recent';
+  const hasActiveFilters = query.length > 0 || selectedCategories.length > 0 || selectedDifficulty !== null;
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-20 md:px-10 md:py-32">
@@ -63,8 +58,6 @@ export default function HomePage() {
         onCategoryChange={handleCategoryToggle}
         selectedDifficulty={selectedDifficulty}
         onDifficultyChange={setSelectedDifficulty}
-        sortBy={sortBy}
-        onSortChange={setSortBy}
         hasActiveFilters={hasActiveFilters}
         onReset={handleReset}
       />
