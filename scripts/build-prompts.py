@@ -43,6 +43,7 @@ CREATED_AT = '2026-10-06'
 # against the docx being renumbered. Each entry: (title, one-line reason).
 EXCLUDE = {
     37: ('Project Manager', 'Written as a reply to a PRD request, not as an instruction to the model.'),
+    52: ('Financial Analyst', 'garbled wording, asks for stock market prediction'),
     60: ('Salesperson', 'Tells the model to make a product look more valuable than it is to push a sale.'),
 }
 

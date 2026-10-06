@@ -25,13 +25,13 @@ JSON_PATH = ROOT / 'public' / 'data' / 'prompts.json'
 CONSTANTS_PATH = ROOT / 'lib' / 'constants.ts'
 
 DOCX_TOTAL = 157  # numbered prompt headings in the docx
-EXCLUDED = {37: 'Project Manager', 60: 'Salesperson'}  # must match EXCLUDE in build-prompts.py
+EXCLUDED = {37: 'Project Manager', 52: 'Financial Analyst', 60: 'Salesperson'}  # must match EXCLUDE in build-prompts.py
 EXPECTED_TOTAL = DOCX_TOTAL - len(EXCLUDED)
-EXPECTED_WITH_VARIABLES = 64  # neither excluded prompt has variables
+EXPECTED_WITH_VARIABLES = 64  # no excluded prompt has variables
 EXPECTED_CATEGORIES = {
     'Writing & Editing': 17,
     'Career & Job Search': 16,
-    'Business, Strategy & Product': 21,
+    'Business, Strategy & Product': 20,
     'Marketing, Sales & Support': 13,
     'Productivity & Meetings': 7,
     'Coding & Software Engineering': 29,
@@ -41,7 +41,7 @@ EXPECTED_CATEGORIES = {
     'Personal & Lifestyle': 8,
     'Creative Writing': 9,
 }
-EXPECTED_SOURCES = {'prompts.chat': 137, 'LLM-Prompt-Library (abilzerian)': 18}
+EXPECTED_SOURCES = {'prompts.chat': 136, 'LLM-Prompt-Library (abilzerian)': 18}
 SOURCE_RULES = {
     'prompts.chat': ('CC0-1.0', 'https://github.com/f/prompts.chat'),
     'LLM-Prompt-Library (abilzerian)': ('MIT', 'https://github.com/abilzerian/LLM-Prompt-Library'),

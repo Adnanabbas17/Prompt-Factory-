@@ -1080,26 +1080,6 @@
       "createdAt": "2026-10-06"
     },
     {
-      "id": "financial-analyst",
-      "title": "Financial Analyst",
-      "description": "Reads charts with technical analysis and macroeconomic context to give a market outlook with clear verdicts.",
-      "category": "Business, Strategy & Product",
-      "tags": [
-        "finance",
-        "technical-analysis",
-        "markets"
-      ],
-      "author": "prompts.chat",
-      "source": "prompts.chat",
-      "license": "CC0-1.0",
-      "sourceUrl": "https://github.com/f/prompts.chat",
-      "content": "Want assistance provided by qualified individuals enabled with experience on understanding charts using technical analysis tools while interpreting macroeconomic environment prevailing across world consequently assisting customers acquire long term advantages requires clear verdicts therefore seeking same through informed predictions written down precisely! First statement contains following content- Can you tell us what future stock market looks like based upon current conditions ?\"\".\"",
-      "useCase": "Get a technical and macro view of a market",
-      "difficulty": "Beginner",
-      "variables": [],
-      "createdAt": "2026-10-06"
-    },
-    {
       "id": "accountant",
       "title": "Accountant",
       "description": "Proposes ways to manage finances, covering budgeting, investment strategy, risk management and tax considerations.",
