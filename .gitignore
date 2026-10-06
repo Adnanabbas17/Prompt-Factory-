@@ -11,3 +11,5 @@ dist/
 coverage/
 .turbo
 tsconfig.tsbuildinfo
+*.docx
+__pycache__/
