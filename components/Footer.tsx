@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Footer() {
   return (
     <footer className="mt-24 border-t-2 border-light-border bg-light-surface dark:border-dark-border dark:bg-dark-surface">
@@ -12,14 +14,22 @@ export default function Footer() {
 
           <div>
             <h4 className="mb-4 font-serif text-sm font-light text-light-text dark:text-dark-text">Project</h4>
-            <a
-              href="https://github.com/adnanabbas17/prompt-factory-"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-light-text-secondary transition-colors hover:text-light-link hover:underline dark:text-dark-text-secondary dark:hover:text-dark-accent"
-            >
-              GitHub
-            </a>
+            <div className="flex flex-col gap-2">
+              <a
+                href="https://github.com/adnanabbas17/prompt-factory-"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-light-text-secondary transition-colors hover:text-light-link hover:underline dark:text-dark-text-secondary dark:hover:text-dark-accent"
+              >
+                GitHub
+              </a>
+              <Link
+                href="/licenses"
+                className="text-sm text-light-text-secondary transition-colors hover:text-light-link hover:underline dark:text-dark-text-secondary dark:hover:text-dark-accent"
+              >
+                Licenses
+              </Link>
+            </div>
           </div>
         </div>
 

@@ -16,7 +16,8 @@ export function searchPrompts(filters: SearchFilters, list: Prompt[] = prompts):
       (p) =>
         p.title.toLowerCase().includes(query) ||
         p.description.toLowerCase().includes(query) ||
-        p.tags.some((tag) => tag.toLowerCase().includes(query))
+        p.tags.some((tag) => tag.toLowerCase().includes(query)) ||
+        p.content.toLowerCase().includes(query)
     );
   }
 
@@ -28,21 +29,7 @@ export function searchPrompts(filters: SearchFilters, list: Prompt[] = prompts):
     results = results.filter((p) => p.difficulty === filters.difficulty);
   }
 
-  return sortPrompts(results, filters.sortBy);
-}
-
-function sortPrompts(list: Prompt[], sortBy: SearchFilters['sortBy']): Prompt[] {
-  const sorted = [...list];
-
-  switch (sortBy) {
-    case 'popular':
-      return sorted.sort((a, b) => b.usageCount - a.usageCount);
-    case 'rating':
-      return sorted.sort((a, b) => b.rating - a.rating);
-    case 'recent':
-    default:
-      return sorted.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-  }
+  return results;
 }
 
 export function getRelatedPrompts(prompt: Prompt, limit = 3): Prompt[] {

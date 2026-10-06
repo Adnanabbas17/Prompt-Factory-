@@ -34,17 +34,16 @@ Or deploy directly to **Vercel** for free:
 ## ✨ Features Included
 
 ### Homepage (`/`)
-- ✅ Search prompts by title, description, tags (real-time, debounced)
-- ✅ Filter by category (Writing, Coding, Analysis, Brainstorm, Teaching)
+- ✅ Search prompts by title, description, tags, prompt text (real-time, debounced)
+- ✅ Filter by category (11 categories, see `lib/constants.ts`)
 - ✅ Filter by difficulty (Beginner, Intermediate, Advanced)
-- ✅ Sort by recent, popular, or rating
 - ✅ Reset filters link (appears when filters active)
 - ✅ Display count: "Showing X of Y prompts"
 
 ### Prompt Details (`/prompts/[id]`)
 - ✅ Full prompt content with code formatting
-- ✅ Complete metadata (author, category, difficulty, created date)
-- ✅ Usage stats (rating, usage count)
+- ✅ Complete metadata (source, category, difficulty, created date)
+- ✅ Source, license, and link to the source repository
 - ✅ Related prompts from same category (3 prompts)
 - ✅ Shareable URLs for each prompt
 - ✅ Back link to homepage
@@ -77,7 +76,7 @@ prompt-factory/
 │   ├── types.ts                # TypeScript interfaces
 │   └── prompts.ts              # Utility functions
 ├── public/data/
-│   └── prompts.json            # 5 sample prompts (ready to expand)
+│   └── prompts.json            # 154 curated prompts (generated, see README)
 └── [configs]
     ├── next.config.js
     ├── tailwind.config.js
@@ -97,24 +96,12 @@ prompt-factory/
 
 ## 📝 Customization
 
-### Add New Prompts
-Edit `/public/data/prompts.json` and add to the array:
+### Update the Prompts
+`public/data/prompts.json` is generated from the curated `.docx`. Do not edit it by hand. See **Updating the Prompt Library** in `README.md`:
 
-```json
-{
-  "id": "my-prompt",
-  "title": "My Custom Prompt",
-  "description": "What this prompt does",
-  "category": "Coding",
-  "tags": ["tag1", "tag2"],
-  "author": "Your Name",
-  "content": "Full prompt text here...",
-  "useCase": "When to use this",
-  "difficulty": "Intermediate",
-  "createdAt": "2026-09-30",
-  "rating": 4.5,
-  "usageCount": 100
-}
+```bash
+python3 scripts/build-prompts.py path/to/Curated-Prompt-Library.docx
+python3 scripts/validate-prompts.py path/to/Curated-Prompt-Library.docx
 ```
 
 ### Change Colors

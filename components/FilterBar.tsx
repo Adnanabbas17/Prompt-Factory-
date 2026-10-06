@@ -7,8 +7,6 @@ interface FilterBarProps {
   onCategoryChange: (category: string) => void;
   selectedDifficulty: string | null;
   onDifficultyChange: (difficulty: string | null) => void;
-  sortBy: 'recent' | 'popular' | 'rating';
-  onSortChange: (sort: 'recent' | 'popular' | 'rating') => void;
   hasActiveFilters: boolean;
   onReset: () => void;
 }
@@ -18,15 +16,13 @@ export default function FilterBar({
   onCategoryChange,
   selectedDifficulty,
   onDifficultyChange,
-  sortBy,
-  onSortChange,
   hasActiveFilters,
   onReset,
 }: FilterBarProps) {
   return (
     <div className="w-full max-w-7xl mx-auto mb-16 space-y-4">
       <div className="flex flex-wrap gap-6 items-center">
-        <div className="flex flex-wrap gap-6">
+        <div className="flex flex-wrap gap-x-6 gap-y-1 md:gap-y-6">
           {CATEGORIES.map((category) => (
             <button
               key={category}
@@ -60,22 +56,6 @@ export default function FilterBar({
                 {difficulty}
               </option>
             ))}
-          </select>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <label htmlFor="sort" className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
-            Sort:
-          </label>
-          <select
-            id="sort"
-            value={sortBy}
-            onChange={(e) => onSortChange(e.target.value as 'recent' | 'popular' | 'rating')}
-            className="text-sm px-3 py-2 border-b-2 border-light-border dark:border-dark-border bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text focus-visible:outline-none focus-visible:border-light-accent dark:focus-visible:border-dark-accent transition-colors"
-          >
-            <option value="recent">Recent</option>
-            <option value="popular">Popular</option>
-            <option value="rating">Rating</option>
           </select>
         </div>
 
